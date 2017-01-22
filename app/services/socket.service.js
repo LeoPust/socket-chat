@@ -17,12 +17,14 @@
 
         function sendAuthData(models){
             var vm = this;
-            console.log(vm.sockets);
             return new Promise(function(resolve,reject){
                 if(!vm.sockets.connected)return reject(false);
 
                 vm.sockets.emit("user::authorization",JSON.stringify(models),function(data){
+                    data = JSON.parse(data);
 
+                    if(data.error)return reject(false);
+                    resolve(data.token);
                 });
             });
         }
