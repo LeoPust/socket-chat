@@ -35,6 +35,12 @@
                 controllerAs:"vm",
                 templateUrl:"templates/pages/auth.page.html"
 
+            })
+            .state("registration",{
+                url:"/registration",
+                controller:"RegistrationController",
+                controllerAs:"vm",
+                templateUrl:"templates/pages/reg.page.html"
             });
 
     }

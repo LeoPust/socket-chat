@@ -11,7 +11,8 @@
 
         var service = {
             sockets:sockets,
-            sendAuthData:sendAuthData
+            sendAuthData:sendAuthData,
+            sendRegData:sendRegData
         };
         return service;
 
@@ -26,6 +27,13 @@
                     if(data.error)return reject(false);
                     resolve(data.token);
                 });
+            });
+        }
+
+        function sendRegData(models){
+            var vm = this;
+            return new Promise(function(resolve,reject){
+
             });
         }
     }
