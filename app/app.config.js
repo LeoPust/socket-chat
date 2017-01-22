@@ -15,15 +15,27 @@
                 url:"/",
                 abstract:true
             })
-            .state("container.home",{
-                url:"",
-                views:{
-                    'sidebar':{},
-                    'header':{},
-                    'home':{}
-                }
-            })
-            .state("authorization",{})
-            .state("registration",{})
+            // .state("container.home",{
+            //     url:"",
+            //     views:{
+            //         'sidebar':{
+            //             templateUrl:"templates/components/sidebar.component.html"
+            //         },
+            //         'header':{
+            //             templateUrl:"templates/components/sidebar.component.html"
+            //         },
+            //         'home':{
+            //             templateUrl:"templates/components/sidebar.component.html"
+            //         }
+            //     }
+            // })
+            .state("auth",{
+                url:"/authorization",
+                controller:"AuthorizationController",
+                controllerAs:"vm",
+                templateUrl:"templates/pages/auth.page.html"
+
+            });
+
     }
 })();

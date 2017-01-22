@@ -29,9 +29,11 @@ app.options("*",(req,res) => {
         .end();
 });
 
-app.get("/",(req,res) => {
+app.get("*",(req,res) => {
    res.sendFile(__dirname + "/templates/index.html");
 });
+
+require("./sockets/main.socket")(sockets);
 
 app.listen(9100,() => {
     console.log("SERVER::START");

@@ -4,9 +4,10 @@
         .module("App")
         .run(Run);
 
-    Run.$inject = ['$http'];
+    Run.$inject = ['$http','$state'];
 
-    function Run($http){
+    function Run($http,$state){
         $http.defaults.headers.post = {'Content-Type':'application/json'};
+        if(localStorage.getItem("socket::token") === null)$state.go("auth");
     }
 })();
