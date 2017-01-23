@@ -36,6 +36,7 @@ gulp.task('js::pump::app', function(cb) {
             './node_modules/angular-cookies/angular-cookies.min.js',
             './node_modules/angular-material/angular-material.js',
             './node_modules/angular-moment/angular-moment.min.js',
+            './node_modules/angular-material/angular-material.js',
             './app/**/*.module.js',
             './app/**/*.const.js',
             './app/**/*.js',

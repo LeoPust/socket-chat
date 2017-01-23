@@ -1,3 +1,4 @@
 module.exports = {
-  Auth:""
+  Auth:"CALL `user::authorization`(?,?)",
+  Reg:"CALL `user::registration`(?,?,?,?,?)"
 };

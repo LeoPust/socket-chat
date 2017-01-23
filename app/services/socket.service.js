@@ -33,7 +33,15 @@
         function sendRegData(models){
             var vm = this;
             return new Promise(function(resolve,reject){
+                if(!vm.sockets.connected)return reject(false);
 
+                vm.sockets.emit("user::registration",JSON.stringify(models),function(data){
+                   data = JSON.parse(data);
+
+                    if(data.error)return reject(false);
+
+                    resolve(true);
+                });
             });
         }
     }

@@ -3,7 +3,7 @@ let DB = require("../database/main.database");
 
 module.exports = sockets => {
     sockets.on("connection",socket => {
-       socket.on("user::authorization",(data,callback) => {
+        socket.on("user::authorization",(data,callback) => {
             data = JSON.parse(data);
             DB.User.Auth(data)
                 .then(data => {
@@ -15,5 +15,12 @@ module.exports = sockets => {
                 .then(err => callback(JSON.stringify({error:true,status:400,token:null})));
        });
 
+        socket.on("user::registration",(data,callback) => {
+            data = JSON.parse(data);
+
+            DB.User.Reg(data)
+                .then(result => callback(JSON.stringify({error:null,status:200})))
+                .catch(err => callback(JSON.stringify({error:true,status:400})));
+        });
     });
 };

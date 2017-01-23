@@ -4,9 +4,9 @@
         .module("App")
         .service("regService",regService);
 
-    regService.$inject = ['socketService'];
+    regService.$inject = ['socketService','$state'];
 
-    function regService(socketService){
+    function regService(socketService,$state){
         var models = {
             login:"",
             password:"",
@@ -28,10 +28,12 @@
                     password:vm.models.password,
                     email:vm.models.email,
                     first_name:vm.models.first_name,
-                    lsat_name:vm.models.lsat_name
+                    last_name:vm.models.last_name
                 };
             socketService.sendRegData(models)
-                .then(function(){});
+                .then(function(){
+                    $state.go("auth");
+                });
         }
     }
 })();
