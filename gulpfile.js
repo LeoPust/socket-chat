@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 
 gulp.task('sass', function () {
     return gulp.src([
+        './node_modules/angular-material/angular-material.css',
         './node_modules/bootstrap/dist/css/bootstrap.min.css',
         './sass/*.css',
         './sass/**/*.scss'
@@ -60,6 +61,7 @@ gulp.task('js::app', function() {
             './node_modules/angular-cookies/angular-cookies.min.js',
             './node_modules/angular-material/angular-material.js',
             './node_modules/angular-moment/angular-moment.min.js',
+            './node_modules/angular-material/angular-material.js',
             './app/**/*.module.js',
             './app/**/*.const.js',
             './app/**/*.js',
