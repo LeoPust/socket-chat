@@ -1,0 +1,12 @@
+header{
+  background: #FFFFFF;
+  position: absolute!important;
+  left:16.66666667%;
+  right:0;
+  top:0;
+  height:60px;
+
+  & > div {
+    line-height: 60px;
+  }
+}

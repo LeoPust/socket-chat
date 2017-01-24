@@ -15,20 +15,26 @@
                 url:"/",
                 abstract:true
             })
-            // .state("container.home",{
-            //     url:"",
-            //     views:{
-            //         'sidebar':{
-            //             templateUrl:"templates/components/sidebar.component.html"
-            //         },
-            //         'header':{
-            //             templateUrl:"templates/components/sidebar.component.html"
-            //         },
-            //         'home':{
-            //             templateUrl:"templates/components/sidebar.component.html"
-            //         }
-            //     }
-            // })
+            .state("container.home",{
+                url:"",
+                views:{
+                    'sidebar':{
+                        controller:"SideBarController",
+                        controllerAs:"vm",
+                        templateUrl:"templates/components/sidebar.component.html"
+                    },
+                    'header':{
+                        controller:"HeaderController",
+                        controllerAs:"vm",
+                        templateUrl:"templates/components/header.component.html"
+                    },
+                    'home':{
+                        controller:"HomeController",
+                        controllerAs:"vm",
+                        templateUrl:"templates/pages/home.page.html"
+                    }
+                }
+            })
             .state("auth",{
                 url:"/authorization",
                 controller:"AuthorizationController",

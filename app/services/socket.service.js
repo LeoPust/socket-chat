@@ -12,7 +12,8 @@
         var service = {
             sockets:sockets,
             sendAuthData:sendAuthData,
-            sendRegData:sendRegData
+            sendRegData:sendRegData,
+            tokenValidate:tokenValidate
         };
         return service;
 
@@ -42,6 +43,21 @@
 
                     resolve(true);
                 });
+            });
+        }
+
+        function tokenValidate(){
+            var vm = this;
+
+            return new Promise(function(resolve,reject){
+               vm.sockets.on("connect",function(){
+                  vm.sockets.send("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
+                      data = JSON.parse(data);
+
+                      if(data.error)return reject(false);
+                      resolve(true);
+                  })
+               });
             });
         }
     }

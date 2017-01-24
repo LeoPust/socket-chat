@@ -18,7 +18,10 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-    gulp.watch('./sass/**/*.scss', ['sass']);
+    gulp.watch([
+        './sass/**/*.scss',
+        './sass/**/*.css'
+    ], ['sass']);
 });
 
 gulp.task('js::pump::app', function(cb) {

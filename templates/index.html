@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <base href="/">
-    <title>SocketChat</title>
+    <title>Chatify</title>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="js/all.min.js"></script>
     <link rel="stylesheet" href="css/all.min.css">
 </head>
 <body ng-app="App">
-    <div  class="page container-fluid" ui-view>
-        <div class="row">
+    <div  id="container" ui-view>
+        <div>
             <div ui-view="header"></div>
             <div ui-view="sidebar"></div>
             <div ui-view="home"></div>
