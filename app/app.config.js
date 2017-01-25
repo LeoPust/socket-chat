@@ -8,7 +8,7 @@
 
     function Config($locationProvider,$urlRouterProvider,$stateProvider){
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise('/404');
+        
 
         $stateProvider
             .state("container",{
@@ -36,7 +36,7 @@
                 }
             })
             .state("auth",{
-                url:"/authorization",
+                url:"authorization",
                 controller:"AuthorizationController",
                 controllerAs:"vm",
                 templateUrl:"templates/pages/auth.page.html"

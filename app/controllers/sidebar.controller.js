@@ -10,5 +10,11 @@
         var vm = this;
 
         vm.models = sideBarService.models;
+
+        activate();
+
+        function activate(){
+            sideBarService.tokenValidate();
+        }
     }
 })();

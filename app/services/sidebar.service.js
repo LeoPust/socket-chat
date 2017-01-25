@@ -4,9 +4,9 @@
         .module("App")
         .service("sideBarService",sideBarService);
 
-    sideBarService.$inject = ['socketService'];
+    sideBarService.$inject = ['$state','socketService'];
 
-    function sideBarService(socketService){
+    function sideBarService($state,socketService){
         var models = {};
 
         var service = {
@@ -21,7 +21,17 @@
         }
 
         function tokenValidate(){
-            return socketService.tokenValidate();
+            socketService.tokenValidate()
+                .then(function(){
+                    return socketService.getProfile();
+                })
+                .then(function(data){
+
+                })
+                .catch(function(){
+                    localStorage.clear();
+                    $state.go("auth");
+                });
         }
     }
 })();

@@ -13,7 +13,8 @@
             sockets:sockets,
             sendAuthData:sendAuthData,
             sendRegData:sendRegData,
-            tokenValidate:tokenValidate
+            tokenValidate:tokenValidate,
+            getProfile:getProfile
         };
         return service;
 
@@ -50,15 +51,34 @@
             var vm = this;
 
             return new Promise(function(resolve,reject){
-               vm.sockets.on("connect",function(){
-                  vm.sockets.send("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
+                if(!vm.sockets.connected)
+                   vm.sockets.on("connect",function(){
+                       vm.sockets.emit("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
+                           data = JSON.parse(data);
+                           console.log(data);
+                           if(data.error)return reject(false);
+                           resolve(true);
+                       });
+                   });
+                else
+                   vm.sockets.emit("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
                       data = JSON.parse(data);
-
+                      console.log(data);
                       if(data.error)return reject(false);
                       resolve(true);
-                  })
-               });
+                  });
             });
+        }
+
+        function getProfile(){
+            var vm = this;
+            return new Promise(function (resolve,reject) {
+                vm.sockets.emit("user::profile",{},function(data){
+                    data = JSON.parse(data);
+                    console.log(data);
+                    resolve(true);
+                });
+            })
         }
     }
 })();

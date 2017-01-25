@@ -3,7 +3,9 @@ let settings = require("./setting.user");
 
 module.exports = {
     Auth:Auth,
-    Reg:Reg
+    Reg:Reg,
+    Token:Token,
+    Profile:Profile
 };
 
 function Auth(pool){
@@ -32,6 +34,30 @@ function Reg(pool){
 
                resolve(true);
            });
+        });
+    }
+}
+
+function Token(pool){
+    return token => {
+        return new Promise((resolve,reject) => {
+            pool.query(settings.Token,[token],(err,rows) => {
+                if(err)return reject(false);
+
+                resolve(rows[0][0]);
+            });
+        });
+    }
+}
+
+function Profile(pool){
+    return token => {
+        return new Promise((resolve,reject) => {
+            pool.query(settings.Profile,[token],(err,rows) => {
+                if(err)return reject(false);
+
+                resolve(rows[0][0]);
+            });
         });
     }
 }

@@ -12,5 +12,7 @@ let pool = mysql.createPool({
 
 module.exports = {
     Auth:middleware.Auth(pool),
-    Reg:middleware.Reg(pool)
+    Reg:middleware.Reg(pool),
+    Token:middleware.Token(pool),
+    Profile:middleware.Profile(pool)
 };
