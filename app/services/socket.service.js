@@ -86,6 +86,7 @@
         function getUserList() {
             var vm = this;
             return new Promise(function(resolve,reject){
+                console.log(vm.sockets.connected);
                 if(!vm.sockets.connected)return reject(false);
                 vm.sockets.emit("room::users",{},function(result){
                     result = JSON.parse(result);

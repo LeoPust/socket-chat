@@ -33,6 +33,7 @@ module.exports = socket => {
                 socket._user.id = result.id;
                 socket._user.token = result.token;
                 socket._user.expires = result.expires;
+                socket.broadcast.emit("room::users::status",JSON.stringify({id:result.id,status:"online"}));
                 callback(JSON.stringify({error:null,status:200}))
             })
             .catch(err => {
@@ -45,5 +46,9 @@ module.exports = socket => {
         DB.User.Profile(socket._user.token)
             .then(result => callback(JSON.stringify({error:null,status:200,profile:result})))
             .catch(err => callback(JSON.stringify({error:true,status:400})));
+    });
+
+    socket.on("disconnect",() => {
+        socket.broadcast.emit("room::users::status",JSON.stringify({id:socket._user.id,status:"offline"}));
     })
 };

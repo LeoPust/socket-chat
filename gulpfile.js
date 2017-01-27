@@ -91,5 +91,5 @@ gulp.task('html::minify', function() {
 });
 
 gulp.task('html:watch', function () {
-    gulp.watch('./templates/**/*.html', ['html::minify']);
+    gulp.watch('./dev-templates/**/*.html', ['html::minify']);
 });

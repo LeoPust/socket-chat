@@ -7,7 +7,9 @@
     sideBarService.$inject = ['$state','$rootScope','socketService'];
 
     function sideBarService($state,$rootScope,socketService){
-        var models = {},
+        var models = {
+            users:[]
+        },
             profile = {
                 login:""
             };
@@ -37,8 +39,11 @@
                 })
                 .then(function(data){
                     console.log(data);
+                    vm.models.users = data;
+                    $rootScope.$apply();
                 })
                 .catch(function(err){
+                    console.log(err);
                     if(err.status == 401){
                         localStorage.clear();
                         $state.go("auth");

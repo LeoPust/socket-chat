@@ -4,9 +4,9 @@
         .module("App")
         .controller("SideBarController",SideBarController);
 
-    SideBarController.$inject = ['sideBarService'];
+    SideBarController.$inject = ['sideBarService','socketListenersService'];
 
-    function SideBarController(sideBarService){
+    function SideBarController(sideBarService,socketListenersService){
         var vm = this;
 
         vm.models = sideBarService.models;
@@ -16,6 +16,7 @@
 
         function activate(){
             vm.tokenValidate();
+            socketListenersService.sideBarListeners();
         }
     }
 })();
