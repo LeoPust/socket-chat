@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    pump = require('pump');
+    pump = require('pump'),
+    htmlmin = require('gulp-html-minifier');
 
 gulp.task('sass', function () {
     return gulp.src([
@@ -27,6 +28,7 @@ gulp.task('sass:watch', function () {
 gulp.task('js::pump::app', function(cb) {
     pump([
         gulp.src([
+            './other-script/socket.io-1.4.5.js',
             './node_modules/moment/min/moment.min.js',
             './node_modules/angular/angular.min.js',
             './node_modules/angular-animate/angular-animate.min.js',
@@ -53,6 +55,7 @@ gulp.task('js::pump::app', function(cb) {
 
 gulp.task('js::app', function() {
         gulp.src([
+            './other-script/socket.io-1.4.5.js',
             './node_modules/moment/min/moment.min.js',
             './node_modules/angular/angular.min.js',
             './node_modules/angular-animate/angular-animate.min.js',
@@ -78,4 +81,15 @@ gulp.task('js::app', function() {
 
 gulp.task('js:watch', function () {
     gulp.watch('./app/**/*.js', ['js::app']);
+});
+
+
+gulp.task('html::minify', function() {
+    gulp.src('./dev-templates/**/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./templates'))
+});
+
+gulp.task('html:watch', function () {
+    gulp.watch('./templates/**/*.html', ['html::minify']);
 });

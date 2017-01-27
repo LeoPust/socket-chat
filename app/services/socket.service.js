@@ -14,7 +14,8 @@
             sendAuthData:sendAuthData,
             sendRegData:sendRegData,
             tokenValidate:tokenValidate,
-            getProfile:getProfile
+            getProfile:getProfile,
+            getUserList:getUserList
         };
         return service;
 
@@ -56,7 +57,7 @@
                        vm.sockets.emit("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
                            data = JSON.parse(data);
                            console.log(data);
-                           if(data.error)return reject(false);
+                           if(data.error)return reject(data);
                            resolve(true);
                        });
                    });
@@ -64,7 +65,7 @@
                    vm.sockets.emit("user::token",JSON.stringify({token:localStorage.getItem("socket::token")}),function(data){
                       data = JSON.parse(data);
                       console.log(data);
-                      if(data.error)return reject(false);
+                      if(data.error)return reject(data);
                       resolve(true);
                   });
             });
@@ -75,10 +76,20 @@
             return new Promise(function (resolve,reject) {
                 vm.sockets.emit("user::profile",{},function(data){
                     data = JSON.parse(data);
-                    console.log(data);
-                    resolve(true);
+
+                    if(data.error)return reject(data);
+                    resolve(data.profile);
                 });
             })
+        }
+
+        function getUserList() {
+            var vm = this;
+            return new Promise(function(resolve,reject){
+                if(!vm.sockets.connected)return reject(false);
+                vm.sockets.emit("")
+
+            });
         }
     }
 })();

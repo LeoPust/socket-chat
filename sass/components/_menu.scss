@@ -4,4 +4,25 @@
   top:0;
   bottom:0;
   background: #2F4050;
+
+  &__profile{
+    height: 60px;
+    @include flexBox();
+    @include alignItems(center);
+    @include justifyContent(center);
+    @include flexWrap(wrap);
+
+    p{
+      color:#DFE4DC;
+      font-size:14px;
+      width: 100%;
+      margin:2px 0;
+      text-align:center;
+
+      &.profile{
+        text-decoration: underline;
+        cursor:pointer;
+      }
+    }
+  }
 }

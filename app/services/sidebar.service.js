@@ -4,13 +4,17 @@
         .module("App")
         .service("sideBarService",sideBarService);
 
-    sideBarService.$inject = ['$state','socketService'];
+    sideBarService.$inject = ['$state','$rootScope','socketService'];
 
-    function sideBarService($state,socketService){
-        var models = {};
+    function sideBarService($state,$rootScope,socketService){
+        var models = {},
+            profile = {
+                login:""
+            };
 
         var service = {
             models:models,
+            profile:profile,
             getProfile:getProfile,
             tokenValidate:tokenValidate
         };
@@ -21,16 +25,24 @@
         }
 
         function tokenValidate(){
+            var vm = this;
             socketService.tokenValidate()
                 .then(function(){
                     return socketService.getProfile();
                 })
                 .then(function(data){
-
+                    vm.profile.login = data.login;
+                    $rootScope.$apply();
+                    return socketService.getUserList();
                 })
-                .catch(function(){
-                    localStorage.clear();
-                    $state.go("auth");
+                .then(function(data){
+                    console.log(data);
+                })
+                .catch(function(err){
+                    if(err.status == 401){
+                        localStorage.clear();
+                        $state.go("auth");
+                    }
                 });
         }
     }
