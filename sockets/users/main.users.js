@@ -8,6 +8,7 @@ module.exports = socket => {
         DB.User.Auth(data)
             .then(result => {
                 socket._user = {};
+                socket._user.id = result.id;
                 socket._user.token = result.token;
                 socket._user.expires = result.expires;
                 callback(JSON.stringify({error:null,status:200,token:result.token}))
@@ -29,6 +30,7 @@ module.exports = socket => {
         DB.User.Token(data.token)
             .then(result => {
                 socket._user = {};
+                socket._user.id = result.id;
                 socket._user.token = result.token;
                 socket._user.expires = result.expires;
                 callback(JSON.stringify({error:null,status:200}))

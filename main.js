@@ -15,7 +15,7 @@ let express         = require("express"),
 app
     .use(helmet())
     .use(nocache())
-    .use(compression())
+    .use(compression({ threshold: 0 }))
     .use(logger('dev'))
     .use(bodyParser.urlencoded({extended:false}))
     .use(bodyParser.json())

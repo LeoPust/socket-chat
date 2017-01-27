@@ -42,7 +42,7 @@ function Token(pool){
     return token => {
         return new Promise((resolve,reject) => {
             pool.query(settings.Token,[token],(err,rows) => {
-                if(err)return reject(false);
+                if(err || !rows[0][0].result)return reject(false);
 
                 resolve(rows[0][0]);
             });

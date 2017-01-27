@@ -87,7 +87,12 @@
             var vm = this;
             return new Promise(function(resolve,reject){
                 if(!vm.sockets.connected)return reject(false);
-                vm.sockets.emit("")
+                vm.sockets.emit("room::users",{},function(result){
+                    result = JSON.parse(result);
+
+                    if(result.error)return reject(result);
+                    resolve(result.users);
+                });
 
             });
         }
