@@ -33,7 +33,7 @@ module.exports = socket => {
                 socket._user.id = result.id;
                 socket._user.token = result.token;
                 socket._user.expires = result.expires;
-                socket.broadcast.emit("room::users::status",JSON.stringify({id:result.id,status:"online"}));
+                socket.broadcast.emit("room::users::status",JSON.stringify({id:result.id,status:"online",socket_id:socket.id}));
                 callback(JSON.stringify({error:null,status:200}))
             })
             .catch(err => {

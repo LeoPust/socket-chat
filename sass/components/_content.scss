@@ -8,9 +8,12 @@
   .content{
     position: absolute;
     top:60px;
-    right: 0;
+    right: -18px;
     bottom:0;
     left:16.66666667%;
     background: #F3F3F4;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
   }
 }

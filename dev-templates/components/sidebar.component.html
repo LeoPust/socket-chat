@@ -6,7 +6,7 @@
     <div class="menu-block__user-list">
         <h5>Пользователи:</h5>
         <div class="elements">
-            <div class="element" ng-repeat="item in vm.models.users">
+            <div class="element" ng-repeat="item in vm.models.users track by $index" ng-click="vm.openRoom($index)">
                 <div class="status" ng-class="item.status"></div>
                 <p>{{item.login}}</p>
             </div>
